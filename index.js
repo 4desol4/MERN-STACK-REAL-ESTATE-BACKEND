@@ -12,10 +12,20 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json())
 app.use(cookieParser())
+const allowedOrigins = [
+  "https://mern-stack-real-estate-frontend.vercel.app/",
+];
+
 app.use(cors({
-    origin: 'https://mern-stack-real-estate-frontend.vercel.app/',
-    credentials: true,
-}))
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 
 app.get('/api/test', (req, res) => {
     console.log('TEST ENDPOINT HIT!');
