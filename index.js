@@ -7,13 +7,14 @@ import { residencyRoute } from './routes/residencyRoute.js';
 dotenv.config()
 
 const app = express();
-
 const PORT = process.env.PORT || 8000;
 
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cookieParser());
+
+// ✅ CORS Configuration
 const allowedOrigins = [
-  "https://mern-stack-real-estate-frontend.vercel.app",
+  "https://mern-stack-real-estate-frontend.vercel.app" 
 ];
 
 app.use(cors({
@@ -27,13 +28,16 @@ app.use(cors({
   credentials: true,
 }));
 
+// ✅ Routes
+app.use('/api/user', userRoute);
+app.use("/api/residency", residencyRoute);
+
 app.get('/api/test', (req, res) => {
     console.log('TEST ENDPOINT HIT!');
     res.json({ message: 'Server is working!' });
 });
-app.listen(PORT, ()=> {
-    console.log(`Server is running on port ${PORT}`);
-});
 
-app.use('/api/user', userRoute)
-app.use("/api/residency", residencyRoute)
+// ✅ Start server AFTER routes are defined
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
