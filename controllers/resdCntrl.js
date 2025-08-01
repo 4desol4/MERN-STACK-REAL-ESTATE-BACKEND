@@ -15,7 +15,22 @@ export const createResidency = asyncHandler(async (req, res) => {
     userEmail,
   } = req.body;
 
-  console.log(req.body.data);
+  console.log(req.body);
+ if (
+    !title ||
+    !description ||
+    !price ||
+    !address ||
+    !country ||
+    !city ||
+    !facilities ||
+    !image ||
+    !userEmail
+  ) {
+    res.status(400);
+    throw new Error("All fields are required.");
+  }
+
   try {
     const residency = await prisma.residency.create({
       data: {
