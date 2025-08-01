@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json())
 app.use(cookieParser())
 const allowedOrigins = [
-  "https://mern-stack-real-estate-frontend.vercel.app/",
+  "https://mern-stack-real-estate-frontend.vercel.app",
 ];
 
 app.use(cors({
