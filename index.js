@@ -14,8 +14,8 @@ app.use(cookieParser());
 
 //  CORS Configuration
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://mern-stack-real-estate-frontend.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
